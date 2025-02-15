@@ -11,8 +11,10 @@ import vn.cnpm.shoestore.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -51,6 +53,26 @@ public class UserController {
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
     public String createUserPage(Model model, @ModelAttribute("newUser") User minhduc) {
         this.userService.handleSaveUser(minhduc);
+        return "redirect:/admin/user";
+    }
+
+    @GetMapping("/admin/user/update/{id}")
+    public String getUpdateUserPage(Model model, @PathVariable long id) {
+        User currentUser = this.userService.getUserById(id);
+        model.addAttribute("newUser", currentUser);
+        return "admin/user/update";
+    }
+
+    @PostMapping("/admin/user/update")
+    public String postUpdateUser(Model model, @ModelAttribute("newUser") User minhduc) {
+        User currentUser = this.userService.getUserById(minhduc.getId());
+        if (currentUser != null) {
+            currentUser.setAddress(minhduc.getAddress());
+            currentUser.setFullName(minhduc.getFullName());
+            currentUser.setPhone(minhduc.getPhone());
+            this.userService.handleSaveUser(currentUser);
+        }
+
         return "redirect:/admin/user";
     }
 
