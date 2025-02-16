@@ -19,11 +19,11 @@ public class Order {
     private long id;
 
     private double totalPrice;
-    private Order order;
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "user_id")
+    private User user;
     @OneToMany(mappedBy = "order")
-    List<OrderDetail> orderDetails;
+    private List<OrderDetail> orderDetails;
 
     public long getId() {
         return id;

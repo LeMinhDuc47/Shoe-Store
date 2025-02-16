@@ -1,11 +1,17 @@
-package vn.cnpm.shoestore.controller;
+package vn.cnpm.shoestore.controller.admin;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import vn.cnpm.shoestore.domain.User;
+import vn.cnpm.shoestore.service.UploadService;
 import vn.cnpm.shoestore.service.UserService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,13 +21,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.servlet.ServletContext;
 
 @Controller
 public class UserController {
     private final UserService userService;
+    private final UploadService uploadService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UploadService uploadService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.uploadService = uploadService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @RequestMapping("/")
@@ -33,7 +46,7 @@ public class UserController {
     public String getUserPage(Model model) {
         List<User> users = this.userService.getAllUsers();
         model.addAttribute("users", users);
-        return "admin/user/table-user";
+        return "admin/user/show";
     }
 
     @GetMapping("/admin/user/{id}")
@@ -41,17 +54,23 @@ public class UserController {
         User user = this.userService.getUserById(id);
         model.addAttribute("user", user);
         model.addAttribute("id", id);
-        return "admin/user/show";
+        return "admin/user/detail";
     }
 
-    @RequestMapping("/admin/user/create")
+    @GetMapping("/admin/user/create")
     public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
         return "admin/user/create";
     }
 
-    @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
-    public String createUserPage(Model model, @ModelAttribute("newUser") User minhduc) {
+    @PostMapping(value = "/admin/user/create")
+    public String createUserPage(Model model, @ModelAttribute("newUser") User minhduc,
+            @RequestParam("minhducFile") MultipartFile file) {
+        String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
+        String hashPassword = this.passwordEncoder.encode(minhduc.getPassword());
+        minhduc.setAvatar(avatar);
+        minhduc.setPassword(hashPassword);
+        minhduc.setRole(this.userService.getRoleByName(minhduc.getRole().getName()));
         this.userService.handleSaveUser(minhduc);
         return "redirect:/admin/user";
     }
@@ -59,7 +78,7 @@ public class UserController {
     @GetMapping("/admin/user/update/{id}")
     public String getUpdateUserPage(Model model, @PathVariable long id) {
         User currentUser = this.userService.getUserById(id);
-        model.addAttribute("newUser", currentUser);
+        model.addAttribute("user", currentUser);
         return "admin/user/update";
     }
 
@@ -78,14 +97,17 @@ public class UserController {
 
     @GetMapping("/admin/user/delete/{id}")
     public String getDeleteUserPage(Model model, @PathVariable long id) {
-        model.addAttribute("id", id);
-        model.addAttribute("newUser", new User());
+        User user = this.userService.getUserById(id);
+        model.addAttribute("user", user);
         return "admin/user/delete";
     }
 
     @PostMapping("/admin/user/delete")
     public String postDeleteUser(Model model, @ModelAttribute("newUser") User minhduc) {
-        this.userService.deleteAUSer(minhduc.getId());
+        User currentUser = this.userService.getUserById(minhduc.getId());
+        if (currentUser != null) {
+            this.userService.deleteUser(currentUser);
+        }
         return "redirect:/admin/user";
     }
 }
