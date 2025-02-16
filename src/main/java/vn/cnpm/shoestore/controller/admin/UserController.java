@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
 import vn.cnpm.shoestore.domain.User;
 import vn.cnpm.shoestore.service.UploadService;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class UserController {
@@ -57,8 +61,16 @@ public class UserController {
     }
 
     @PostMapping(value = "/admin/user/create")
-    public String createUserPage(Model model, @ModelAttribute("newUser") User minhduc,
+    public String createUserPage(Model model, @ModelAttribute("newUser") @Valid User minhduc,
+            BindingResult bindingResult,
             @RequestParam("minhducFile") MultipartFile file) {
+        List<FieldError> errors = bindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(" >>>> " + error.getField() + " - " + error.getDefaultMessage());
+        }
+        if (bindingResult.hasErrors()) {
+            return "/admin/user/create";
+        }
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
         String hashPassword = this.passwordEncoder.encode(minhduc.getPassword());
         minhduc.setAvatar(avatar);
