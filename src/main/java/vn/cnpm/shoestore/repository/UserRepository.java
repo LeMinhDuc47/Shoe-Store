@@ -9,6 +9,7 @@ import vn.cnpm.shoestore.domain.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+    @SuppressWarnings({ "unchecked" })
     User save(User minduc);
 
     List<User> findAll();

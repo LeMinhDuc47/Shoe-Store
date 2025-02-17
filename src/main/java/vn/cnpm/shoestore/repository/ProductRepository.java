@@ -9,8 +9,12 @@ import vn.cnpm.shoestore.domain.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    @SuppressWarnings({ "null", "unchecked" })
+    @SuppressWarnings({ "unchecked" })
     Product save(Product product);
 
     List<Product> findAll();
+
+    Product findById(long id);
+
+    void deleteById(long id);
 }

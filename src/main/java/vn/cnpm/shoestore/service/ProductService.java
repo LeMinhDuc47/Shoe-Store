@@ -1,6 +1,7 @@
 package vn.cnpm.shoestore.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -21,5 +22,17 @@ public class ProductService {
 
     public List<Product> getAllProducts() {
         return this.productRepository.findAll();
+    }
+
+    public Product getProductById(long id) {
+        return this.productRepository.findById(id);
+    }
+
+    public Optional<Product> fetchProductById(long id) {
+        return Optional.of(this.productRepository.findById(id));
+    }
+
+    public void deleteProduct(long id) {
+        this.productRepository.deleteById(id);
     }
 }
