@@ -1,5 +1,8 @@
 package vn.cnpm.shoestore.domain.dto;
 
+import vn.cnpm.shoestore.service.validator.RegisterChecked;
+
+@RegisterChecked
 public class RegisterDTO {
     private String firstName;
     private String lastName;
