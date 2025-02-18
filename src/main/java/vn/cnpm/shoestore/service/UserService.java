@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import vn.cnpm.shoestore.domain.Role;
 import vn.cnpm.shoestore.domain.User;
+import vn.cnpm.shoestore.domain.dto.RegisterDTO;
 import vn.cnpm.shoestore.repository.RoleRepository;
 import vn.cnpm.shoestore.repository.UserRepository;
 
@@ -37,5 +38,13 @@ public class UserService {
 
     public Role getRoleByName(String name) {
         return this.roleRepository.findByName(name);
+    }
+
+    public User registerDTOtoUser(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setFullName(registerDTO.getFirstName() + " " + registerDTO.getLastName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(registerDTO.getPassword());
+        return user;
     }
 }
