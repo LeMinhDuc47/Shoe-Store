@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -14,8 +16,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.cnpm.shoestore.domain.User;
+import vn.cnpm.shoestore.service.UserService;
 
 public class CustomSuccessHandler implements AuthenticationSuccessHandler {
+    @Autowired
+    private UserService userService;
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Override
@@ -26,7 +32,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
             return;
         }
         redirectStrategy.sendRedirect(request, response, targetUrl);
-        clearAuthenticationAttributes(request);
+        clearAuthenticationAttributes(request, authentication);
     }
 
     protected String determineTargetUrl(final Authentication authentication) {
@@ -43,11 +49,19 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         throw new IllegalStateException();
     }
 
-    protected void clearAuthenticationAttributes(HttpServletRequest request) {
+    protected void clearAuthenticationAttributes(HttpServletRequest request, Authentication authentication) {
         HttpSession session = request.getSession(false);
         if (session == null) {
             return;
         }
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+        // get email
+        String email = authentication.getName();
+        // search user
+        User user = this.userService.getUserByEmail(email);
+        if (user != null) {
+            session.setAttribute("fullName", user.getFullName());
+            session.setAttribute("avatar", user.getAvatar());
+        }
     }
 }
