@@ -9,9 +9,10 @@ import vn.cnpm.shoestore.domain.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    @SuppressWarnings({ "unchecked" })
+    @SuppressWarnings({ "unchecked", "null" })
     User save(User minduc);
 
+    @SuppressWarnings({ "null" })
     List<User> findAll();
 
     User findById(long id);
@@ -19,4 +20,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     void deleteById(long id);
 
     boolean existsByEmail(String email);
+
+    User findByEmail(String email);
+
 }
