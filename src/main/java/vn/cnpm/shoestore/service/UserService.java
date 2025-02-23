@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import vn.cnpm.shoestore.domain.Role;
 import vn.cnpm.shoestore.domain.User;
 import vn.cnpm.shoestore.domain.dto.RegisterDTO;
+import vn.cnpm.shoestore.repository.OrderRepository;
+import vn.cnpm.shoestore.repository.ProductRepository;
 import vn.cnpm.shoestore.repository.RoleRepository;
 import vn.cnpm.shoestore.repository.UserRepository;
 
@@ -14,10 +16,16 @@ import vn.cnpm.shoestore.repository.UserRepository;
 public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final ProductRepository productRepository;
+    private final OrderRepository orderRepository;
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository,
+            ProductRepository productRepository,
+            OrderRepository orderRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.productRepository = productRepository;
+        this.orderRepository = orderRepository;
     }
 
     public List<User> getAllUsers() {
@@ -54,5 +62,17 @@ public class UserService {
 
     public User getUserByEmail(String email) {
         return this.userRepository.findByEmail(email);
+    }
+
+    public long countUsers() {
+        return this.userRepository.count();
+    }
+
+    public long countProducts() {
+        return this.productRepository.count();
+    }
+
+    public long countOrders() {
+        return this.orderRepository.count();
     }
 }
