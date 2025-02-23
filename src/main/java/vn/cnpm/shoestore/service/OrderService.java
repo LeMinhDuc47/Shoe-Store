@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import vn.cnpm.shoestore.domain.Order;
 import vn.cnpm.shoestore.domain.OrderDetail;
+import vn.cnpm.shoestore.domain.User;
 import vn.cnpm.shoestore.repository.OrderDetailRepository;
 import vn.cnpm.shoestore.repository.OrderRepository;
 
@@ -51,5 +52,9 @@ public class OrderService {
             currentOrder.setStatus(order.getStatus());
             this.orderRepository.save(currentOrder);
         }
+    }
+
+    public List<Order> fetchOrderByUser(User user) {
+        return this.orderRepository.findByUser(user);
     }
 }
