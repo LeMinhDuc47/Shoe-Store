@@ -138,7 +138,7 @@
                 link.addClass('active'); // Add 'active' class if the href matches the current URL
             } else {
                 link.removeClass('active'); // Remove 'active' class if the href does not match
-            }
+            } 
         });
     });
 
