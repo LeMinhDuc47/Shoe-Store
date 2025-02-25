@@ -21,6 +21,7 @@ import vn.cnpm.shoestore.repository.CartRepository;
 import vn.cnpm.shoestore.repository.OrderDetailRepository;
 import vn.cnpm.shoestore.repository.OrderRepository;
 import vn.cnpm.shoestore.repository.ProductRepository;
+import vn.cnpm.shoestore.service.specification.ProductSpecs;
 
 @Service
 public class ProductService {
