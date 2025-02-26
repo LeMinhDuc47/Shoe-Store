@@ -1,5 +1,7 @@
 package vn.cnpm.shoestore.service.specification;
 
+import java.util.List;
+
 import org.springframework.data.jpa.domain.Specification;
 
 import vn.cnpm.shoestore.domain.Product;
