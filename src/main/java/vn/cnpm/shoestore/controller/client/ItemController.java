@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import jakarta.servlet.http.HttpSession;
 import vn.cnpm.shoestore.domain.Cart;
 import vn.cnpm.shoestore.domain.CartDetail;
 import vn.cnpm.shoestore.domain.Product;
+import vn.cnpm.shoestore.domain.Product_;
 import vn.cnpm.shoestore.domain.User;
 import vn.cnpm.shoestore.domain.dto.ProductCriteriaDTO;
 import vn.cnpm.shoestore.service.ProductService;
@@ -155,7 +157,17 @@ public class ItemController {
             // page = 1
             // TODO: handle exception
         }
-        Pageable pageable = PageRequest.of(page - 1, 60);
+        Pageable pageable = PageRequest.of(page - 1, 3);
+        // check sort price
+        if (productCriteriaDTO.getSort() != null && productCriteriaDTO.getSort().isPresent()) {
+            String sort = productCriteriaDTO.getSort().get();
+            if (sort.equals("gia-tang-dan")) {
+                pageable = PageRequest.of(page - 1, 3, Sort.by(Product_.PRICE).ascending());
+            } else if (sort.equals("gia-giam-dan")) {
+                pageable = PageRequest.of(page - 1, 3, Sort.by(Product_.PRICE).descending());
+
+            }
+        }
         Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, productCriteriaDTO);
         List<Product> products = prs.getContent().size() > 0 ? prs.getContent() : new ArrayList<Product>();
         model.addAttribute("products", products);
