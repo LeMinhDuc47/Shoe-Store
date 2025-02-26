@@ -21,6 +21,7 @@ import vn.cnpm.shoestore.domain.Cart;
 import vn.cnpm.shoestore.domain.CartDetail;
 import vn.cnpm.shoestore.domain.Product;
 import vn.cnpm.shoestore.domain.User;
+import vn.cnpm.shoestore.domain.dto.ProductCriteriaDTO;
 import vn.cnpm.shoestore.service.ProductService;
 
 @Controller
@@ -141,16 +142,12 @@ public class ItemController {
 
     @GetMapping("/products")
     public String getProductPage(Model model,
-            @RequestParam("page") Optional<String> pageOptional,
-            @RequestParam("name") Optional<String> nameOptional,
-            @RequestParam("factory") Optional<String> factoryOptional,
-            @RequestParam("price") Optional<String> priceOptional,
-            @RequestParam("sort") Optional<String> softOptional) {
+            ProductCriteriaDTO productCriteriaDTO) {
         int page = 1;
         try {
-            if (pageOptional.isPresent()) {
+            if (productCriteriaDTO.getPage().isPresent()) {
                 // convert from String to int
-                page = Integer.parseInt(pageOptional.get());
+                page = Integer.parseInt(productCriteriaDTO.getPage().get());
             } else {
                 // page = 1
             }
@@ -159,10 +156,8 @@ public class ItemController {
             // TODO: handle exception
         }
         Pageable pageable = PageRequest.of(page - 1, 60);
-        String name = nameOptional.isPresent() ? nameOptional.get() : "";
-        Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, name);
-        List<Product> products = prs.getContent();
-
+        Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, productCriteriaDTO);
+        List<Product> products = prs.getContent().size() > 0 ? prs.getContent() : new ArrayList<Product>();
         model.addAttribute("products", products);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", prs.getTotalPages());
