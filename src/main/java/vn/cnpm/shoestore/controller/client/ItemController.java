@@ -144,7 +144,7 @@ public class ItemController {
 
     @GetMapping("/products")
     public String getProductPage(Model model,
-            ProductCriteriaDTO productCriteriaDTO) {
+            ProductCriteriaDTO productCriteriaDTO, HttpServletRequest request) {
         int page = 1;
         try {
             if (productCriteriaDTO.getPage().isPresent()) {
