@@ -14,7 +14,6 @@ import vn.cnpm.shoestore.domain.CartDetail;
 import vn.cnpm.shoestore.domain.Order;
 import vn.cnpm.shoestore.domain.OrderDetail;
 import vn.cnpm.shoestore.domain.Product;
-import vn.cnpm.shoestore.domain.Product_;
 import vn.cnpm.shoestore.domain.User;
 import vn.cnpm.shoestore.domain.dto.ProductCriteriaDTO;
 import vn.cnpm.shoestore.repository.CartDetailRepository;
@@ -88,7 +87,7 @@ public class ProductService {
             // Set the appropriate min and max based on the price range string
             switch (p) {
                 case "duoi-10-trieu":
-                    min = 0;
+                    min = 1;
                     max = 10000000;
                     break;
                 case "10-15-trieu":

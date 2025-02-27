@@ -20,66 +20,73 @@ import vn.cnpm.shoestore.service.UserService;
 @Configuration
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration {
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 
-    @Bean
-    public UserDetailsService userDetailsService(UserService userService) {
-        return new CustomUserDetailsService(userService);
-    }
+        @Bean
+        public UserDetailsService userDetailsService(UserService userService) {
+                return new CustomUserDetailsService(userService);
+        }
 
-    @Bean
-    public DaoAuthenticationProvider authProvider(PasswordEncoder passwordEncoder,
-            UserDetailsService userDetailsService) {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
-        authProvider.setPasswordEncoder(passwordEncoder);
-        // authProvider.setHideUserNotFoundExceptions(false);
-        return authProvider;
-    }
+        @Bean
 
-    @Bean
-    public AuthenticationSuccessHandler customSuccessHandler() {
-        return new CustomSuccessHandler();
-    }
+        public DaoAuthenticationProvider authProvider(
+                        PasswordEncoder passwordEncoder,
+                        UserDetailsService userDetailsService) {
 
-    @Bean
-    public SpringSessionRememberMeServices rememberMeServices() {
-        SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
-        // optionally customize
-        rememberMeServices.setAlwaysRemember(true);
-        return rememberMeServices;
-    }
+                DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+                authProvider.setUserDetailsService(userDetailsService);
+                authProvider.setPasswordEncoder(passwordEncoder);
+                // authProvider.setHideUserNotFoundExceptions(false);
 
-    @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(authorize -> authorize
-                        .dispatcherTypeMatchers(DispatcherType.FORWARD,
-                                DispatcherType.INCLUDE)
-                        .permitAll()
-                        .requestMatchers("/", "/login", "/register", "/product/**", "/client/**", "/css/**", "/js/**",
-                                "/images/**")
-                        .permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .anyRequest().authenticated())
-                .sessionManagement((sessionManagement) -> sessionManagement
-                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                        .invalidSessionUrl("/logout?expired")
-                        .maximumSessions(1)
-                        .maxSessionsPreventsLogin(false))
-                .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
-                .rememberMe((rememberMe) -> rememberMe
-                        .rememberMeServices(rememberMeServices()))
-                .formLogin(formLogin -> formLogin
-                        .loginPage("/login")
-                        .failureUrl("/login?error")
-                        .successHandler(customSuccessHandler())
-                        .permitAll())
-                .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
+                return authProvider;
+        }
 
-        return http.build();
-    }
+        @Bean
+        public AuthenticationSuccessHandler customSuccessHandler() {
+                return new CustomSuccessHandler();
+        }
+
+        @Bean
+        public SpringSessionRememberMeServices rememberMeServices() {
+                SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
+                // optionally customize
+                rememberMeServices.setAlwaysRemember(true);
+                return rememberMeServices;
+        }
+
+        @Bean
+        SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+                http
+                                .authorizeHttpRequests(authorize -> authorize
+                                                .dispatcherTypeMatchers(DispatcherType.FORWARD,
+                                                                DispatcherType.INCLUDE)
+                                                .permitAll()
+                                                .requestMatchers("/", "/login", "/register", "/products/**",
+                                                                "/product/**", "/client/**", "/css/**",
+                                                                "/js/**",
+                                                                "/images/**")
+                                                .permitAll()
+                                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                                .anyRequest().authenticated())
+                                .sessionManagement((sessionManagement) -> sessionManagement
+                                                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                                                .invalidSessionUrl("/logout?expired")
+                                                .maximumSessions(1)
+                                                .maxSessionsPreventsLogin(false))
+                                .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
+                                .rememberMe((rememberMe) -> rememberMe
+                                                .rememberMeServices(rememberMeServices()))
+                                .formLogin(formLogin -> formLogin
+                                                .loginPage("/login")
+                                                .failureUrl("/login?error")
+                                                .successHandler(customSuccessHandler())
+                                                .permitAll())
+                                .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
+
+                return http.build();
+        }
+
 }

@@ -127,7 +127,8 @@
         $('#videoModal').on('hide.bs.modal', function (e) {
             $("#video").attr('src', $videoSrc);
         })
-          //add active class to header
+
+        //add active class to header
         const navElement = $("#navbarCollapse");
         const currentUrl = window.location.pathname;
         navElement.find('a.nav-link').each(function () {
@@ -138,7 +139,7 @@
                 link.addClass('active'); // Add 'active' class if the href matches the current URL
             } else {
                 link.removeClass('active'); // Remove 'active' class if the href does not match
-            } 
+            }
         });
     });
 
@@ -163,9 +164,12 @@
         }
         const input = button.parent().parent().find('input');
         input.val(newVal);
-   const index = input.attr("data-cart-detail-index")
+
+        //set form index
+        const index = input.attr("data-cart-detail-index")
         const el = document.getElementById(`cartDetails${index}.quantity`);
         $(el).val(newVal);
+
         //get price
         const price = input.attr("data-cart-detail-price");
         const id = input.attr("data-cart-detail-id");
@@ -215,7 +219,9 @@
         formatted = formatted.replace(/\./g, ',');
         return formatted;
     }
- $('#btnFilter').click(function (event) {
+
+    //handle filter products
+    $('#btnFilter').click(function (event) {
         event.preventDefault();
 
         let factoryArr = [];
@@ -245,9 +251,12 @@
         // Add or update query parameters
         searchParams.set('page', '1');
         searchParams.set('sort', sortValue);
+
+        //reset
         searchParams.delete('factory');
         searchParams.delete('target');
         searchParams.delete('price');
+
         if (factoryArr.length > 0) {
             searchParams.set('factory', factoryArr.join(','));
         }
@@ -295,4 +304,110 @@
         const sort = params.get('sort');
         $(`input[type="radio"][name="radio-sort"][value="${sort}"]`).prop('checked', true);
     }
+
+    //////////////////////////
+    //handle add to cart with ajax
+    $('.btnAddToCartHomepage').click(function (event) {
+        event.preventDefault();
+
+        if (!isLogin()) {
+            $.toast({
+                heading: 'Lỗi thao tác',
+                text: 'Bạn cần đăng nhập tài khoản',
+                position: 'top-right',
+                icon: 'error'
+            })
+            return;
+        }
+
+        const productId = $(this).attr('data-product-id');
+        const token = $("meta[name='_csrf']").attr("content");
+        const header = $("meta[name='_csrf_header']").attr("content");
+
+        $.ajax({
+            url: `${window.location.origin}/api/add-product-to-cart`,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(header, token);
+            },
+            type: "POST",
+            data: JSON.stringify({ quantity: 1, productId: productId }),
+            contentType: "application/json",
+
+            success: function (response) {
+                const sum = +response;
+                //update cart
+                $("#sumCart").text(sum)
+                //show message
+                $.toast({
+                    heading: 'Giỏ hàng',
+                    text: 'Thêm sản phẩm vào giỏ hàng thành công',
+                    position: 'top-right',
+
+                })
+
+            },
+            error: function (response) {
+                alert("có lỗi xảy ra")
+                console.log("error: ", response);
+            }
+
+        });
+    });
+
+    $('.btnAddToCartDetail').click(function (event) {
+        event.preventDefault();
+        if (!isLogin()) {
+            $.toast({
+                heading: 'Lỗi thao tác',
+                text: 'Bạn cần đăng nhập tài khoản',
+                position: 'top-right',
+                icon: 'error'
+            })
+            return;
+        }
+
+        const productId = $(this).attr('data-product-id');
+        const token = $("meta[name='_csrf']").attr("content");
+        const header = $("meta[name='_csrf_header']").attr("content");
+        const quantity = $("#cartDetails0\\.quantity").val();
+        $.ajax({
+            url: `${window.location.origin}/api/add-product-to-cart`,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(header, token);
+            },
+            type: "POST",
+            data: JSON.stringify({ quantity: quantity, productId: productId }),
+            contentType: "application/json",
+
+            success: function (response) {
+                const sum = +response;
+                //update cart
+                $("#sumCart").text(sum)
+                //show message
+                $.toast({
+                    heading: 'Giỏ hàng',
+                    text: 'Thêm sản phẩm vào giỏ hàng thành công',
+                    position: 'top-right',
+
+                })
+
+            },
+            error: function (response) {
+                alert("có lỗi xảy ra")
+                console.log("error: ", response);
+            }
+
+        });
+    });
+
+    function isLogin() {
+        const navElement = $("#navbarCollapse");
+        const childLogin = navElement.find('a.a-login');
+        if (childLogin.length > 0) {
+            return false;
+        }
+        return true;
+    }
+
 })(jQuery);
+

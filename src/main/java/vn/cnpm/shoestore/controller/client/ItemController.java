@@ -2,7 +2,6 @@ package vn.cnpm.shoestore.controller.client;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -157,22 +156,29 @@ public class ItemController {
             // page = 1
             // TODO: handle exception
         }
-        Pageable pageable = PageRequest.of(page - 1, 3);
+        Pageable pageable = PageRequest.of(page - 1, 10);
         // check sort price
         if (productCriteriaDTO.getSort() != null && productCriteriaDTO.getSort().isPresent()) {
             String sort = productCriteriaDTO.getSort().get();
             if (sort.equals("gia-tang-dan")) {
-                pageable = PageRequest.of(page - 1, 3, Sort.by(Product_.PRICE).ascending());
+                pageable = PageRequest.of(page - 1, 10, Sort.by(Product_.PRICE).ascending());
             } else if (sort.equals("gia-giam-dan")) {
-                pageable = PageRequest.of(page - 1, 3, Sort.by(Product_.PRICE).descending());
+                pageable = PageRequest.of(page - 1, 10, Sort.by(Product_.PRICE).descending());
 
             }
         }
         Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, productCriteriaDTO);
         List<Product> products = prs.getContent().size() > 0 ? prs.getContent() : new ArrayList<Product>();
+        String qs = request.getQueryString();
+        if (qs != null && !qs.isBlank()) {
+            // remove page
+            qs = qs.replace("page=" + page, "");
+        }
+
         model.addAttribute("products", products);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", prs.getTotalPages());
+        model.addAttribute("queryString", qs);
         return "client/product/show";
     }
 }
