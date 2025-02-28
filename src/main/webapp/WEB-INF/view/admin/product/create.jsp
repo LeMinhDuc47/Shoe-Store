@@ -8,8 +8,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="fsdfdsf" />
-    <meta name="author" content="fdsfsdf" />
+    <meta name="description" content="CNPM - Dự án Shoestore" />
+    <meta name="author" content="CNPM" />
     <title>Create Product</title>
     <link href="/css/styles.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -45,55 +45,84 @@
                             <div class="col-md-6 col-12 mx-auto">
                                 <h3>Create a product</h3>
                                 <hr />
-                                <form:form method="post" action="/admin/user/create" class="row"
+                                <form:form method="post" action="/admin/product/create" class="row"
                                     enctype="multipart/form-data" modelAttribute="newProduct">
                                     <div class="mb-3 col-12 col-md-6">
                                         <label class="form-label">Name:</label>
-                                        <form:input type="text" class="form-control" path="name" />
+                                        <c:set var="nameError">
+                                            <form:errors path="name" />
+                                        </c:set>
+                                        <form:input type="text"
+                                            class="form-control ${not empty nameError? 'is-invalid':''}" path="name" />
+                                        <form:errors path="name" cssClass="invalid-feedback" />
                                     </div>
                                     <div class="mb-3 col-12 col-md-6">
                                         <label class="form-label">Price:</label>
-                                        <form:input type="number" class="form-control" path="price" />
+                                        <c:set var="priceError">
+                                            <form:errors path="price" />
+                                        </c:set>
+                                        <form:input type="number"
+                                            class="form-control ${not empty priceError? 'is-invalid':''}"
+                                            path="price" />
+                                        <form:errors path="price" cssClass="invalid-feedback" />
                                     </div>
                                     <div class="mb-3 col-12">
                                         <label class="form-label">Detail description:</label>
-                                        <form:textarea type="text" class="form-control" path="detailDesc" />
+                                        <c:set var="detailDescError">
+                                            <form:errors path="detailDesc" />
+                                        </c:set>
+                                        <form:textarea type="text"
+                                            class="form-control ${not empty detailDescError? 'is-invalid':''}"
+                                            path="detailDesc" />
+                                        <form:errors path="detailDesc" cssClass="invalid-feedback" />
                                     </div>
                                     <div class="mb-3 col-12 col-md-6">
                                         <label class="form-label">Short description:</label>
-                                        <form:input type="text" class="form-control" path="shortDesc" />
+                                        <c:set var="shortDescError">
+                                            <form:errors path="shortDesc" />
+                                        </c:set>
+                                        <form:input type="text"
+                                            class="form-control ${not empty shortDescError? 'is-invalid':''}"
+                                            path="shortDesc" />
+                                        <form:errors path="shortDesc" cssClass="invalid-feedback" />
                                     </div>
                                     <div class="mb-3 col-12 col-md-6">
                                         <label class="form-label">Quantity:</label>
-                                        <form:input type="number" class="form-control" path="quantity" />
+                                        <c:set var="quantityError">
+                                            <form:errors path="quantity" />
+                                        </c:set>
+                                        <form:input type="number"
+                                            class="form-control ${not empty quantityError? 'is-invalid':''}"
+                                            path="quantity" />
+                                        <form:errors path="quantity" cssClass="invalid-feedback" />
                                     </div>
+
                                     <div class="mb-3 col-12 col-md-6">
                                         <label class="form-label">Factory:</label>
                                         <form:select class="form-select" path="factory">
+                                            <form:option value="LANVIN">Lanvin</form:option>
+                                            <form:option value="NEWBALANCE">New Balance</form:option>
+                                            <form:option value="ASICS">Asics</form:option>
                                             <form:option value="NIKE">Nike</form:option>
                                             <form:option value="ADIDAS">Adidas</form:option>
-                                            <form:option value="NEWBALANCE">Newbalance</form:option>
-                                            <form:option value="PUMA">Puma</form:option>
-                                            <form:option value="ASICS">Asics</form:option>
-                                            <form:option value="LANVIN">Lanvin</form:option>
+                                            <form:option value="UCG">UCG</form:option>
                                         </form:select>
                                     </div>
                                     <div class="mb-3 col-12 col-md-6">
                                         <label class="form-label">Target:</label>
                                         <form:select class="form-select" path="target">
-                                            <form:option value="STREET">Street</form:option>
-                                            <form:option value="SINHVIEN-VANPHONG">Sinh viên - Văn phòng
+                                            <form:option value="THETHAO">Thể thao</form:option>
+                                            <form:option value="TRANGTRONG">Trang trọng
                                             </form:option>
-                                            <form:option value="LUXURY">LUXURY
+                                            <form:option value="CASUAL">Casual
                                             </form:option>
-                                            <form:option value="MONG-NHE">Mỏng nhẹ</form:option>
-                                            <form:option value="DOANH-NHAN">Doanh nhân</form:option>
+                                            <form:option value="STREETWEAR">Street wear</form:option>
                                         </form:select>
                                     </div>
                                     <div class="mb-3 col-12 col-md-6">
                                         <label for="avatarFile" class="form-label">Image:</label>
                                         <input class="form-control" type="file" id="avatarFile"
-                                            accept=".png, .jpg, .jpeg" name="hoidanitFile" />
+                                            accept=".png, .jpg, .jpeg" name="userFile" />
                                     </div>
                                     <div class="col-12 mb-3">
                                         <img style="max-height: 250px; display: none;" alt="avatar preview"
@@ -103,7 +132,9 @@
                                         <button type="submit" class="btn btn-primary">Create</button>
                                     </div>
                                 </form:form>
+
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -114,6 +145,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
     <script src="/js/scripts.js"></script>
+
 </body>
 
 </html>

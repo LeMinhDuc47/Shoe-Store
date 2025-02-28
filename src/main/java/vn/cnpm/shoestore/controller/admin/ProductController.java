@@ -74,7 +74,7 @@ public class ProductController {
     public String createProductPage(Model model,
             @ModelAttribute("newProduct") @Valid Product product,
             BindingResult bindingResult,
-            @RequestParam("minhducFile") MultipartFile file) {
+            @RequestParam("userFile") MultipartFile file) {
         List<FieldError> errors = bindingResult.getFieldErrors();
         for (FieldError error : errors) {
             System.out.println(" >>>> " + error.getField() + " - " + error.getDefaultMessage());
@@ -103,7 +103,7 @@ public class ProductController {
     public String postUpdateProduct(Model model,
             @ModelAttribute("newProduct") @Valid Product product,
             BindingResult newProductBindingResult,
-            @RequestParam("minhducFile") MultipartFile file) {
+            @RequestParam("userFile") MultipartFile file) {
         // validate
         if (newProductBindingResult.hasErrors()) {
             return "admin/product/update";

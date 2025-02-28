@@ -79,7 +79,7 @@ public class UserController {
     @PostMapping(value = "/admin/user/create")
     public String createUserPage(Model model, @ModelAttribute("newUser") @Valid User minhduc,
             BindingResult bindingResult,
-            @RequestParam("minhducFile") MultipartFile file) {
+            @RequestParam("userFile") MultipartFile file) {
         List<FieldError> errors = bindingResult.getFieldErrors();
         for (FieldError error : errors) {
             System.out.println(" >>>> " + error.getField() + " - " + error.getDefaultMessage());

@@ -12,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
-
 import jakarta.servlet.DispatcherType;
 import vn.cnpm.shoestore.service.CustomUserDetailsService;
 import vn.cnpm.shoestore.service.UserService;

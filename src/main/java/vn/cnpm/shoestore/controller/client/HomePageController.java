@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import vn.cnpm.shoestore.domain.Order;
 import vn.cnpm.shoestore.domain.Product;
 import vn.cnpm.shoestore.domain.User;
@@ -55,7 +56,8 @@ public class HomePageController {
     }
 
     @PostMapping("/register")
-    public String handleRegister(@ModelAttribute("registerUser") RegisterDTO registerDTO, BindingResult bindingResult) {
+    public String handleRegister(@ModelAttribute("registerUser") @Valid RegisterDTO registerDTO,
+            BindingResult bindingResult) {
         List<FieldError> errors = bindingResult.getFieldErrors();
         for (FieldError error : errors) {
             System.out.println(" >>>> " + error.getField() + " - " + error.getDefaultMessage());

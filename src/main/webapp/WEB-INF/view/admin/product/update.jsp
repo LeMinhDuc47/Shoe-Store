@@ -9,8 +9,8 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta name="description" content="CNPM - Dự án Shoestore" />
+    <meta name="author" content="CNPM" />
     <title>Create Product</title>
     <link href="/css/styles.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -109,53 +109,57 @@
                                             path="quantity" />
                                         <form:errors path="quantity" cssClass="invalid-feedback" />
                                     </div>
+
                                     <div class="mb-3 col-12 col-md-6">
                                         <label class="form-label">Factory:</label>
                                         <form:select class="form-select" path="factory">
+                                            <form:option value="LANVIN">Lanvin</form:option>
+                                            <form:option value="NEWBALANCE">New Balance</form:option>
+                                            <form:option value="ASICS">Asics</form:option>
                                             <form:option value="NIKE">Nike</form:option>
                                             <form:option value="ADIDAS">Adidas</form:option>
-                                            <form:option value="NEWBALANCE">Newbalance</form:option>
-                                            <form:option value="PUMA">Puma</form:option>
-                                            <form:option value="ASICS">Asics</form:option>
-                                            <form:option value="LANVIN">Lanvin</form:option>
+                                            <form:option value="UCG">UCG</form:option>
                                         </form:select>
                                     </div>
                                     <div class="mb-3 col-12 col-md-6">
                                         <label class="form-label">Target:</label>
                                         <form:select class="form-select" path="target">
-                                            <form:option value="STREET">Street</form:option>
-                                            <form:option value="SINHVIEN-VANPHONG">Sinh viên - Văn phòng
+                                            <form:option value="THETHAO">Thể thao</form:option>
+                                            <form:option value="TRANGTRONG">Trang trọng
                                             </form:option>
-                                            <form:option value="LUXURY">LUXURY
+                                            <form:option value="CASUAL">Casual
                                             </form:option>
-                                            <form:option value="MONG-NHE">Mỏng nhẹ</form:option>
-                                            <form:option value="DOANH-NHAN">Doanh nhân</form:option>
+                                            <form:option value="STREETWEAR">Street wear</form:option>
                                         </form:select>
                                     </div>
-                                    <div class="mb-3 col-12 col-md-6">
-                                        <label for="avatarFile" class="form-label">Image:</label>
-                                        <input class="form-control" type="file" id="avatarFile"
-                                            accept=".png, .jpg, .jpeg" name="hoidanitFile" />
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <img style="max-height: 250px; display: none;" alt="avatar preview"
-                                            id="avatarPreview" />
-                                    </div>
-                                    <div class="col-12 mb-5">
-                                        <button type="submit" class="btn btn-primary">Create</button>
-                                    </div>
-                                </form:form>
                             </div>
+                            <div class="mb-3 col-12 col-md-6">
+                                <label for="avatarFile" class="form-label">Image:</label>
+                                <input class="form-control" type="file" id="avatarFile" accept=".png, .jpg, .jpeg"
+                                    name="userFile" />
+                            </div>
+                            <div class="col-12 mb-3">
+                                <img style="max-height: 250px; display: none;" alt="avatar preview"
+                                    id="avatarPreview" />
+                            </div>
+                            <div class="col-12 mb-5">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            </div>
+                            </form:form>
+
                         </div>
+
                     </div>
                 </div>
-            </main>
-            <jsp:include page="../layout/footer.jsp" />
         </div>
+        </main>
+        <jsp:include page="../layout/footer.jsp" />
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
     <script src="/js/scripts.js"></script>
+
 </body>
 
 </html>

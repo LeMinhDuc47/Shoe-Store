@@ -33,7 +33,16 @@ public class UserService {
     }
 
     public User handleSaveUser(User user) {
-        return this.userRepository.save(user);
+        System.out.println("User trước khi lưu: " + user);
+        System.out.println("Password: " + user.getPassword());
+        System.out.println("Full Name: " + user.getFullName());
+
+        try {
+            return this.userRepository.save(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public User getUserById(long id) {

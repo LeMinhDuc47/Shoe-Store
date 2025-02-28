@@ -10,7 +10,7 @@ import vn.cnpm.shoestore.domain.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     @SuppressWarnings({ "unchecked", "null" })
-    User save(User minduc);
+    User save(User user);
 
     @SuppressWarnings({ "null" })
     Page<User> findAll(Pageable pageable);
