@@ -2,6 +2,7 @@ package vn.cnpm.shoestore.domain;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +20,7 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Min(value = 0)
-    private int sum;
+
     // user_id
     @OneToOne()
     @JoinColumn(name = "user_id")
@@ -27,6 +28,7 @@ public class Cart {
     // cart_detail_id
     @OneToMany(mappedBy = "cart")
     List<CartDetail> cartDetails;
+    private int sum;
 
     public long getId() {
         return id;

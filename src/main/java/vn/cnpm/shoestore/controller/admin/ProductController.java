@@ -61,7 +61,7 @@ public class ProductController {
             Product product = productOptional.get();
             model.addAttribute("product", product);
         }
-        return "/admin/product/detail";
+        return "admin/product/detail";
     }
 
     @GetMapping("/admin/product/create")
@@ -81,7 +81,7 @@ public class ProductController {
         }
         // validate
         if (bindingResult.hasErrors()) {
-            return "/admin/product/create";
+            return "admin/product/create";
         }
         String image = this.uploadService.handleSaveUploadFile(file, "product");
         product.setImage(image);
@@ -96,7 +96,7 @@ public class ProductController {
             Product product = productOptional.get();
             model.addAttribute("newProduct", product);
         }
-        return "/admin/product/update";
+        return "admin/product/update";
     }
 
     @PostMapping("/admin/product/update")
@@ -137,7 +137,7 @@ public class ProductController {
             Product product = productOptional.get();
             model.addAttribute("product", product);
         }
-        return "/admin/product/delete";
+        return "admin/product/delete";
     }
 
     @PostMapping("/admin/product/delete")
