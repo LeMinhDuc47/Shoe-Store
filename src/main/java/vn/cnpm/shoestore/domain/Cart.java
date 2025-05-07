@@ -18,8 +18,8 @@ import jakarta.validation.constraints.Min;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
     @Min(value = 0)
+    private long id;
 
     // user_id
     @OneToOne()
