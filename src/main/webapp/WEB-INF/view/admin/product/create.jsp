@@ -100,23 +100,23 @@
                                     <div class="mb-3 col-12 col-md-6">
                                         <label class="form-label">Factory:</label>
                                         <form:select class="form-select" path="factory">
-                                            <form:option value="LANVIN">Lanvin</form:option>
-                                            <form:option value="NEWBALANCE">New Balance</form:option>
-                                            <form:option value="ASICS">Asics</form:option>
                                             <form:option value="NIKE">Nike</form:option>
+                                            <form:option value="UNDERARMOUR">Under Armour</form:option>
+                                            <form:option value="PUMA">PUMA</form:option>
+                                            <form:option value="MIZUNO">MIZUNO</form:option>
                                             <form:option value="ADIDAS">Adidas</form:option>
-                                            <form:option value="UCG">UCG</form:option>
+                                            <form:option value="AKKA">AKKA</form:option>
                                         </form:select>
                                     </div>
                                     <div class="mb-3 col-12 col-md-6">
                                         <label class="form-label">Target:</label>
                                         <form:select class="form-select" path="target">
-                                            <form:option value="THETHAO">Thể thao</form:option>
-                                            <form:option value="TRANGTRONG">Trang trọng
+                                            <form:option value="BRAND">Hãng</form:option>
+                                            <form:option value="COLOR">Màu sắc
                                             </form:option>
-                                            <form:option value="CASUAL">Casual
-                                            </form:option>
-                                            <form:option value="STREETWEAR">Street wear</form:option>
+                                            <form:option value="SHOEHEIGHT">Giày cao</form:option>
+
+                                            <form:option value="Material">Vật liệu</form:option>
                                         </form:select>
                                     </div>
                                     <div class="mb-3 col-12 col-md-6">
