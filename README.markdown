@@ -11,10 +11,11 @@ Dữ liệu được lưu trữ cục bộ bằng `localStorage` để đảm b�
 
 ### Hình ảnh minh họa
 Dưới đây là các ảnh chụp giao diện chính của dự án:
-- ![alt text](<Screenshot 2025-05-07 011757.png>) - Giao diện đăng nhập
-- ![alt text](<Screenshot 2025-05-07 011946.png>)  - Giao diện đăng kí
-- ![alt text](<Screenshot 2025-05-07 011924.png>) - danh sách đội ngũ phát triển
-- ![alt text](<Screenshot 2025-05-07 011910.png>) - quản lí kho giày
+- ![Screenshot 2025-05-07 011757.png](<attachment:Screenshot 2025-05-07 011757.png>) - Giao diện đăng nhập
+- ![Screenshot 2025-05-07 011946.png](<attachment:Screenshot 2025-05-07 011946.png>)  - Giao diện đăng kí
+- ![Screenshot 2025-05-07 011924.png](<attachment:Screenshot 2025-05-07 011924.png>) - danh sách đội ngũ phát triển
+- ![Screenshot 2025-05-07 011910.png](<attachment:Screenshot 2025-05-07 011910.png>) - quản lí kho giày
+
 ## Chức năng chi tiết
 ### 1. Hiển thị danh sách giày
 - **Mô tả**: Hiển thị danh sách giày trong kho dưới dạng lưới (grid) với các thẻ sản phẩm.
@@ -57,8 +58,8 @@ Dưới đây là các ảnh chụp giao diện chính của dự án:
   3. Nhấp "Lưu" để thêm sản phẩm mới vào `inventory` với ID tự tăng, cập nhật `localStorage`, render lại danh sách, và reset form.
   4. Nhấp "Hủy", nút đóng (×), hoặc nhấp ra ngoài để hủy hành động.
 - **Hiệu ứng**: Nút "Thêm Sản Phẩm" có màu xanh, hover chuyển sang xanh đậm. Form có validation HTML5 (yêu cầu tất cả trường).
-- ![alt text](<Screenshot 2025-05-07 011848.png>) - dashboard 
-- ![alt text](<Screenshot 2025-05-07 011829.png>) - dashboard giao diện tối
+- ![Screenshot 2025-05-07 011829.png](<attachment:Screenshot 2025-05-07 011829.png>) - dashboard 
+- ![Screenshot 2025-05-07 011848.png](<attachment:Screenshot 2025-05-07 011848.png>) - trang dashboard - dashboard giao diện tối
 ## Yêu cầu hệ thống
 - **Trình duyệt**: Chrome, Firefox, Edge hoặc các trình duyệt hiện đại khác.
 - **File cần thiết**:
