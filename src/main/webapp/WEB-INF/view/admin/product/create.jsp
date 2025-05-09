@@ -105,18 +105,16 @@
                                             <form:option value="PUMA">PUMA</form:option>
                                             <form:option value="MIZUNO">MIZUNO</form:option>
                                             <form:option value="ADIDAS">Adidas</form:option>
-                                            <form:option value="AKKA">AKKA</form:option>
+                                            <form:option value="AKKA">Akka</form:option>
                                         </form:select>
                                     </div>
                                     <div class="mb-3 col-12 col-md-6">
                                         <label class="form-label">Target:</label>
                                         <form:select class="form-select" path="target">
-                                            <form:option value="BRAND">Hãng</form:option>
-                                            <form:option value="COLOR">Màu sắc
-                                            </form:option>
-                                            <form:option value="SHOEHEIGHT">Giày cao</form:option>
-
-                                            <form:option value="Material">Vật liệu</form:option>
+                                            <form:option value="SOFTGROUND">Sân cỏ tự nhiên</form:option>
+                                            <form:option value="ARTIFICIALGROUND">Sân cỏ nhân tạo</form:option>
+                                            <form:option value="LOWCUT">Cổ thấp</form:option>
+                                            <form:option value="MIDCUT">Cổ trung</form:option>
                                         </form:select>
                                     </div>
                                     <div class="mb-3 col-12 col-md-6">

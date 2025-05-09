@@ -8,7 +8,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title> Sản Phẩm - Laptopshop</title>
+    <title> Sản Phẩm - ShoeStore</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -74,60 +74,54 @@
                             <div class="col-12" id="factoryFilter">
                                 <div class="mb-2"><b>Hãng sản xuất</b></div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="factory-1" value="APPLE">
-                                    <label class="form-check-label" for="factory-1">Apple</label>
+                                    <input class="form-check-input" type="checkbox" id="factory-1" value="NIKE">
+                                    <label class="form-check-label" for="factory-1">Nike</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="factory-2" value="ASUS">
-                                    <label class="form-check-label" for="factory-2">Asus</label>
-                                </div>
-
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="factory-3" value="LENOVO">
-                                    <label class="form-check-label" for="factory-3">Lenovo</label>
+                                    <input class="form-check-input" type="checkbox" id="factory-2" value="UNDERARMOUR">
+                                    <label class="form-check-label" for="factory-2">Under Armour</label>
                                 </div>
 
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="factory-4" value="DELL">
-                                    <label class="form-check-label" for="factory-4">Dell</label>
+                                    <input class="form-check-input" type="checkbox" id="factory-3" value="PUMA">
+                                    <label class="form-check-label" for="factory-3">Puma</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="factory-4" value="MIZUNO">
+                                    <label class="form-check-label" for="factory-4">Mizuno</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="factory-5" value="LG">
-                                    <label class="form-check-label" for="factory-5">LG</label>
+                                    <input class="form-check-input" type="checkbox" id="factory-5" value="ADIDAS">
+                                    <label class="form-check-label" for="factory-5">Adidas</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="factory-6" value="ACER">
-                                    <label class="form-check-label" for="factory-6">Acer</label>
+                                    <input class="form-check-input" type="checkbox" id="factory-6" value="AKKA">
+                                    <label class="form-check-label" for="factory-6">Akka</label>
                                 </div>
 
                             </div>
                             <div class="col-12" id="targetFilter">
                                 <div class="mb-2"><b>Mục đích sử dụng</b></div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="target-1" value="GAMING">
-                                    <label class="form-check-label" for="target-1">Gaming</label>
+                                    <input class="form-check-input" type="checkbox" id="target-1" value="SOFTGROUND">
+                                    <label class="form-check-label" for="target-1">Sân cỏ tự nhiên</label>
                                 </div>
 
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="target-2"
-                                        value="SINHVIEN-VANPHONG">
-                                    <label class="form-check-label" for="target-2">Sinh viên - văn
-                                        phòng</label>
+                                        value="ARTIFICIALGROUND">
+                                    <label class="form-check-label" for="target-2">Sân cỏ nhân tạo</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="target-3"
-                                        value="THIET-KE-DO-HOA">
-                                    <label class="form-check-label" for="target-3">Thiết kế đồ
-                                        họa</label>
+                                    <input class="form-check-input" type="checkbox" id="target-3" value="LOWCUT">
+                                    <label class="form-check-label" for="target-3">Cổ thấp</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="target-4" value="MONG-NHE">
-                                    <label class="form-check-label" for="target-4">Mỏng nhẹ</label>
+                                    <input class="form-check-input" type="checkbox" id="target-4" value="MIDCUT">
+                                    <label class="form-check-label" for="target-4">Cổ trung</label>
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="target-5" value="DOANH-NHAN">
-                                    <label class="form-check-label" for="target-5">Doanh nhân</label>
-                                </div>
+
 
 
                             </div>
@@ -236,9 +230,8 @@
 
                             <c:if test="${totalPages > 0}">
                                 <div class="pagination d-flex justify-content-center mt-5">
-                                    <li class="page-item">
-                                        <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                            href="/products?page=${currentPage - 1}${queryString}"
+                                    <li class="${1 eq currentPage ? 'disabled page-item' : 'page-item'}">
+                                        <a class="page-link" href="/products?page=${currentPage - 1}${queryString}"
                                             aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>

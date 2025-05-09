@@ -35,7 +35,7 @@
                                 </div>
                                 <hr>
                                 <div class="alert alert-danger">
-                                    Ban muon xoa
+                                    Bạn muốn xóa sản phẩm này?
                                 </div>
                                 <form:form action="/admin/product/delete" method="post" modelAttribute="product">
                                     <div class="mb-3" style="display: none;">

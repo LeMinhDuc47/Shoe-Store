@@ -1,7 +1,10 @@
 package vn.cnpm.shoestore.controller.client;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,14 +26,29 @@ import vn.cnpm.shoestore.domain.Product;
 import vn.cnpm.shoestore.domain.Product_;
 import vn.cnpm.shoestore.domain.User;
 import vn.cnpm.shoestore.domain.dto.ProductCriteriaDTO;
+import vn.cnpm.shoestore.service.OrderService;
 import vn.cnpm.shoestore.service.ProductService;
+import vn.cnpm.shoestore.service.UserService;
+import vn.cnpm.shoestore.service.VNPayService;
 
 @Controller
 public class ItemController {
+
+    private final VNPayService vNPayService;
     private final ProductService productService;
 
-    public ItemController(ProductService productService) {
+    private final UserService userService;
+
+    private final OrderService orderService;
+
+    public ItemController(ProductService productService, UserService userService, OrderService orderService,
+            VNPayService vNPayService) {
+
         this.productService = productService;
+        this.userService = userService;
+        this.orderService = orderService;
+        this.vNPayService = vNPayService;
+
     }
 
     @GetMapping("/product/{id}")
@@ -112,18 +130,40 @@ public class ItemController {
             HttpServletRequest request,
             @RequestParam("receiverName") String receiverName,
             @RequestParam("receiverAddress") String receiverAddress,
-            @RequestParam("receiverPhone") String receiverPhone) {
+            @RequestParam("receiverPhone") String receiverPhone,
+            @RequestParam("paymentMethod") String paymentMethod,
+            @RequestParam("totalPrice") String totalPrice) throws UnsupportedEncodingException {
         User currentUser = new User();
         HttpSession session = request.getSession(false);
         long id = (long) session.getAttribute("id");
         currentUser.setId(id);
 
-        this.productService.handlerPlaceOrder(currentUser, session, receiverName, receiverAddress, receiverPhone);
+        final String uuid = UUID.randomUUID().toString().replace("-", "");
+
+        this.productService.handlerPlaceOrder(currentUser, session, receiverAddress, receiverPhone, receiverName,
+                paymentMethod, uuid);
+
+        if (!paymentMethod.equals("COD")) {
+            String ip = this.vNPayService.getIpAddress(request);
+            String vnpUrl = this.vNPayService.generateVNPayURL(Double.parseDouble(totalPrice), uuid, ip);
+
+            return "redirect:" + vnpUrl;
+        }
         return "redirect:/thanks";
     }
 
     @GetMapping("/thanks")
-    public String getThankYouPage(Model model) {
+    public String getThanksPage(Model model,
+            @RequestParam("vnp_ResponseCode") Optional<String> vnpayResponseCode,
+            @RequestParam("vnp_TxnRef") Optional<String> paymentRef) {
+
+        if (vnpayResponseCode.isPresent() && paymentRef.isPresent()) {
+            // thanh toán qua VNPAY, cập nhật trạng thái order
+            String paymentStatus = vnpayResponseCode.get().equals("00")
+                    ? "PAYMENT_SUCCEED"
+                    : "PAYMENT_FAILED";
+            this.productService.updatePaymentStatus(paymentRef.get(), paymentStatus);
+        }
         return "client/cart/thanks";
     }
 
