@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
@@ -58,11 +59,23 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
                 this.userService.saveUser(oUser);
 
+            } else {
+                if (!user.getProvider().equalsIgnoreCase(registrationId)) {
+                    OAuth2Error error = new OAuth2Error("invalid_request",
+                            "Can't use this email address. Account already exist : " + email, null);
+                    throw new OAuth2AuthenticationException(error);
+                }
             }
+        }
+
+        if (email == null) {
+            OAuth2Error error = new OAuth2Error("Invalid_request",
+                    "Can't get email address. Maybe login with private email (Github)", null);
+            throw new OAuth2AuthenticationException(error);
         }
 
         return new DefaultOAuth2User(
                 Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + userRole.getName())),
-                oAuth2User.getAttributes(), "email");// id
+                oAuth2User.getAttributes(), "email");
     }
 }
