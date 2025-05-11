@@ -98,12 +98,13 @@ public class ItemController {
     }
 
     @GetMapping("/checkout")
-    public String getCheckOutPage(Model model, HttpServletRequest request) {
+    public String getCheckOutPage(Model model, HttpServletRequest request, @RequestParam("cost") int cost,
+            @RequestParam("detailAddress") String detailAddress) {
         User currentUser = new User();// null
         HttpSession session = request.getSession(false);
         long id = (long) session.getAttribute("id");
         currentUser.setId(id);
-
+        currentUser = userService.getUserById(id);
         Cart cart = this.productService.fetchByUser(currentUser);
 
         List<CartDetail> cartDetails = cart == null ? new ArrayList<CartDetail>() : cart.getCartDetails();
@@ -112,10 +113,18 @@ public class ItemController {
         for (CartDetail cd : cartDetails) {
             totalPrice += cd.getPrice() * cd.getQuantity();
         }
-
+        totalPrice += cost;
         model.addAttribute("cartDetails", cartDetails);
         model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("cost", cost);
+        model.addAttribute("detailAddress", detailAddress);
+        model.addAttribute("fullName", currentUser.getFullName());
         return "client/cart/checkout";
+    }
+
+    @GetMapping("/user/order/calculate-fee")
+    public String calculateFee(@ModelAttribute("cart") Cart cart) {
+        return "client/cart/calculate-fee";
     }
 
     @PostMapping("/confirm-checkout")
@@ -141,8 +150,7 @@ public class ItemController {
         final String uuid = UUID.randomUUID().toString().replace("-", "");
 
         this.productService.handlerPlaceOrder(currentUser, session, receiverAddress, receiverPhone, receiverName,
-                paymentMethod, uuid);
-
+                paymentMethod, uuid, Double.parseDouble(totalPrice));
         if (!paymentMethod.equals("COD")) {
             String ip = this.vNPayService.getIpAddress(request);
             String vnpUrl = this.vNPayService.generateVNPayURL(Double.parseDouble(totalPrice), uuid, ip);

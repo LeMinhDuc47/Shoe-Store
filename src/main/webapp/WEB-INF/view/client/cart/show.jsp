@@ -34,6 +34,11 @@
 
     <!-- Template Stylesheet -->
     <link href="/client/css/style.css" rel="stylesheet">
+    <style>
+        .jq-toast-single {
+            font-size: 16px !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -155,7 +160,7 @@
                                 <div class="d-flex justify-content-between">
                                     <h5 class="mb-0 me-4">Phí vận chuyển</h5>
                                     <div class="">
-                                        <p class="mb-0">0 đ</p>
+                                        <p class="mb-0">Chưa có dữ liệu</p>
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +170,7 @@
                                     <fmt:formatNumber type="number" value="${totalPrice}" /> đ
                                 </p>
                             </div>
-                            <form:form action="/confirm-checkout" method="post" modelAttribute="cart">
+                            <form:form action="/user/order/calculate-fee" method="get" modelAttribute="cart">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                 <div style="display: none;">
                                     <c:forEach var="cartDetail" items="${cart.cartDetails}" varStatus="status">

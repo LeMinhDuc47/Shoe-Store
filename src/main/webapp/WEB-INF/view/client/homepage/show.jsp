@@ -34,6 +34,12 @@
     <meta name="_csrf_header" content="${_csrf.headerName}" />
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css" rel="stylesheet">
+    <style>
+        .jq-toast-single {
+            font-size: 16px !important;
+        }
+    </style>
+
 </head>
 
 <body>

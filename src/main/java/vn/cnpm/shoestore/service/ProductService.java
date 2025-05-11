@@ -209,7 +209,7 @@ public class ProductService {
     }
 
     public void handlerPlaceOrder(User user, HttpSession session, String receiverName, String receiverAddress,
-            String receiverPhone, String paymentMethod, String uuid) {
+            String receiverPhone, String paymentMethod, String uuid, double totalPrice) {
         // step 1: get cart by user
         Cart cart = this.cartRepository.findByUser(user);
         if (cart != null) {
@@ -224,13 +224,9 @@ public class ProductService {
                 order.setReceiverPhone(receiverPhone);
                 order.setStatus("PENDING");
                 order.setPaymentMethod(paymentMethod);
-                order.setPaymentStatus("PAYMENT_UNPAID");
+                order.setPaymentStatus("Thanh toán thành công");
                 order.setPaymentRef(paymentMethod.equals("COD") ? "UNKNOWN" : uuid);
-                double sum = 0;
-                for (CartDetail cd : cartDetails) {
-                    sum += cd.getPrice();
-                }
-                order.setTotalPrice(sum);
+                order.setTotalPrice(totalPrice);
                 order = this.orderRepository.save(order);
 
                 // create orderDetail

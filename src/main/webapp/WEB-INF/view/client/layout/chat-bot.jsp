@@ -86,6 +86,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         /* Message area styles */
         .chat-box {
             flex: 1;
+            overflow-x: hidden;
             overflow-y: auto;
             padding: 15px;
             background-color: #f5f5f5;
@@ -111,7 +112,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         .bot-message {
             background-color: #0078ff;
             color: white;
-            float: right;
+            float: left;
             border-bottom-left-radius: 5px;
         }
 
@@ -139,13 +140,15 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         }
 
         .answered-by {
+            padding-bottom: 14px;
             text-align: center;
             font-size: 12px;
             color: #666;
             margin-top: 5px;
             clear: both;
-            padding-top: 40px;
+            padding-top: 0px;
         }
+
 
         /* Input area styles */
         .chat-input-container {
