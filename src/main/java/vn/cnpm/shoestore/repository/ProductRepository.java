@@ -29,4 +29,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpec
 
     @SuppressWarnings("null")
     Page<Product> findAll(Specification<Product> specification, Pageable page);
+
+    Page<Product> findByNameContainingIgnoreCase(String keyword, Pageable pageable);
+
 }

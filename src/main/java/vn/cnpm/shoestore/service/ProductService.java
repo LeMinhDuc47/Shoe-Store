@@ -2,8 +2,10 @@ package vn.cnpm.shoestore.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -16,11 +18,14 @@ import vn.cnpm.shoestore.domain.OrderDetail;
 import vn.cnpm.shoestore.domain.Product;
 import vn.cnpm.shoestore.domain.User;
 import vn.cnpm.shoestore.domain.dto.ProductCriteriaDTO;
+import vn.cnpm.shoestore.domain.dto.ProductElasticDTO;
+import vn.cnpm.shoestore.domain.elastic.ElasticProduct;
 import vn.cnpm.shoestore.repository.CartDetailRepository;
 import vn.cnpm.shoestore.repository.CartRepository;
 import vn.cnpm.shoestore.repository.OrderDetailRepository;
 import vn.cnpm.shoestore.repository.OrderRepository;
 import vn.cnpm.shoestore.repository.ProductRepository;
+import vn.cnpm.shoestore.repository.elasticsearch.ElasticProductRepository;
 import vn.cnpm.shoestore.service.specification.ProductSpecs;
 
 @Service
@@ -31,16 +36,18 @@ public class ProductService {
     private final UserService userService;
     private final OrderRepository orderRepository;
     private final OrderDetailRepository orderDetailRepository;
+    private final ElasticProductRepository elasticProductRepository;
 
     public ProductService(ProductRepository productRepository, CartRepository cartRepository,
             CartDetailRepository cartDetailRepository, UserService userService, OrderRepository orderRepository,
-            OrderDetailRepository orderDetailRepository) {
+            OrderDetailRepository orderDetailRepository, ElasticProductRepository elasticProductRepository) {
         this.productRepository = productRepository;
         this.cartRepository = cartRepository;
         this.cartDetailRepository = cartDetailRepository;
         this.userService = userService;
         this.orderRepository = orderRepository;
         this.orderDetailRepository = orderDetailRepository;
+        this.elasticProductRepository = elasticProductRepository;
     }
 
     public Product handleSaveProduct(Product product) {
@@ -258,5 +265,23 @@ public class ProductService {
             order.setPaymentStatus(paymentStatus);
             this.orderRepository.save(order);
         }
+    }
+
+    public Page<Product> jpaSearchProductsByName(String keyword, Pageable pageable) {
+        return this.productRepository.findByNameContainingIgnoreCase(keyword, pageable);
+    }
+
+    // elasticsearch
+    public Page<Product> elasticSearchProductsByKeyword(String keyword, Pageable pageable) {
+        // Gọi repository sử dụng custom @Query
+        Page<ElasticProduct> results = this.elasticProductRepository.searchByKeyword(keyword, pageable);
+
+        // Chuyển đổi ElasticProduct sang Product
+        List<Product> products = results.getContent().stream()
+                .map(ProductElasticDTO::convertToProduct)
+                .collect(Collectors.toList());
+
+        // Trả về kết quả dưới dạng Page<Product>
+        return new PageImpl<>(products, pageable, results.getTotalElements());
     }
 }

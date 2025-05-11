@@ -219,4 +219,24 @@ public class ItemController {
         model.addAttribute("queryString", qs);
         return "client/product/show";
     }
+
+    // elasticsearch
+    @GetMapping("/search-products")
+    public String searchProducts(
+            @RequestParam("keyword") String keyword,
+            @RequestParam(name = "page", defaultValue = "1") int page,
+            @RequestParam(name = "size", defaultValue = "4") int size,
+            Model model) {
+
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Product> searchResults = productService.elasticSearchProductsByKeyword(keyword, pageable);
+
+        model.addAttribute("allProducts", searchResults.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", searchResults.getTotalPages());
+        model.addAttribute("queryString", "keyword=" + keyword);
+        model.addAttribute("keyword", keyword);
+
+        return "client/product/search-result";
+    }
 }

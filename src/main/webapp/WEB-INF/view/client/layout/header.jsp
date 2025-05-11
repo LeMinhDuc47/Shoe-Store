@@ -16,6 +16,14 @@
                     <a href="/" class="nav-item nav-link active">Trang chủ</a>
                     <a href="/products" class="nav-item nav-link">Sản phẩm</a>
                 </div>
+                <!-- Search bar -->
+                <div class="text-center">
+                    <form action="/search-products" method="get" class="d-flex justify-content-center">
+                        <input type="text" name="keyword" class="form-control me-2" placeholder="Tìm kiếm sản phẩm..."
+                            aria-label="Search">
+                        <button class="btn btn-outline-primary" type="submit">Tìm</button>
+                    </form>
+                </div>
                 <div class="d-flex m-3 me-0">
                     <c:if test="${not empty pageContext.request.userPrincipal}">
                         <a href="/cart" class="position-relative me-4 my-auto">
