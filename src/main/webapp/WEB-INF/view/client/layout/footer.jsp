@@ -8,7 +8,7 @@
                 <div class="col-lg-3">
                     <a href="#">
                         <h1 class="text-primary mb-0">Shoe store</h1>
-                        <p class="text-secondary mb-0">luxury products</p>
+                        <p class="text-secondary mb-0">Quality products</p>
                     </a>
                 </div>
                 <div class="col-lg-6">
@@ -69,7 +69,7 @@
                 <div class="footer-item">
                     <h4 class="text-light mb-3">Contact</h4>
                     <p>Address: 1429 Netus Rd, NY 48247</p>
-                    <p>Email: Example@gmail.com</p>
+                    <p>Email: 23021532@vnu.edu.vn</p>
                     <p>Phone: +0123 4567 8910</p>
                     <p>Payment Accepted</p>
                     <img src="/client/img/payment.png" class="img-fluid" alt="">
@@ -91,8 +91,8 @@
                 <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
                 <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
                 <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a
-                    class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
+                Designed By <a class="border-bottom" href="https://htmlcodex.com">UET</a> Distributed By <a
+                    class="border-bottom" href="https://themewagon.com">UET</a>
             </div>
         </div>
     </div>

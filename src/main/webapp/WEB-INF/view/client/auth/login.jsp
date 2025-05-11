@@ -29,9 +29,7 @@
                                 <div class="card-body">
                                     <form method="post" action="/login">
                                         <c:if test="${param.error != null}">
-                                            <div class="my-2" style="color: red;">
-                                                ${param.error == "" ? "Invalid email or password." : param.error}
-                                            </div>
+                                            <div class="my-2" style="color: red;">Invalid email or password.
                                         </c:if>
                                         <c:if test="${param.logout != null}">
                                             <div class="my-2" style="color: green;">Logout success.

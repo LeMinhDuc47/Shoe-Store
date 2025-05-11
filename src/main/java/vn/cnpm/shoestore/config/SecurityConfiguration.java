@@ -50,11 +50,6 @@ public class SecurityConfiguration {
         }
 
         @Bean
-        public AuthenticationFailureHandler customFailureHandler() {
-                return new CustomOAuth2FailureHandler();
-        }
-
-        @Bean
         public SpringSessionRememberMeServices rememberMeServices() {
                 SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
                 // optionally customize
@@ -78,7 +73,7 @@ public class SecurityConfiguration {
                                                 .anyRequest().authenticated())
                                 .oauth2Login(oauth2 -> oauth2.loginPage("/login")
                                                 .successHandler(customSuccessHandler())
-                                                .failureHandler(customFailureHandler())
+                                                .failureUrl("/login?error")
                                                 .userInfoEndpoint(user -> user
                                                                 .userService(new CustomOAuth2UserService(userService))))
 

@@ -20,9 +20,9 @@ public class Cart implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Min(value = 0)
     private long id;
-
+    @Min(value = 0)
+    private int sum;
     // user_id
     @OneToOne()
     @JoinColumn(name = "user_id")
@@ -30,7 +30,6 @@ public class Cart implements Serializable {
     // cart_detail_id
     @OneToMany(mappedBy = "cart")
     List<CartDetail> cartDetails;
-    private int sum;
 
     public long getId() {
         return id;

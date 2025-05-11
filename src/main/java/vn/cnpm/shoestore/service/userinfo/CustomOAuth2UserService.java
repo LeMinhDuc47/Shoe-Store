@@ -59,19 +59,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
                 this.userService.saveUser(oUser);
 
-            } else {
-                if (!user.getProvider().equalsIgnoreCase(registrationId)) {
-                    OAuth2Error error = new OAuth2Error("invalid_request",
-                            "Can't use this email address. Account already exist : " + email, null);
-                    throw new OAuth2AuthenticationException(error);
-                }
             }
-        }
-
-        if (email == null) {
-            OAuth2Error error = new OAuth2Error("Invalid_request",
-                    "Can't get email address. Maybe login with private email (Github)", null);
-            throw new OAuth2AuthenticationException(error);
         }
 
         return new DefaultOAuth2User(
