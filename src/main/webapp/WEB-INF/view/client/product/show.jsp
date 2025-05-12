@@ -129,25 +129,25 @@
                                 <div class="mb-2"><b>Mức giá</b></div>
 
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="price-2" value="duoi-10-trieu">
-                                    <label class="form-check-label" for="price-2">Dưới 10 triệu</label>
+                                    <input class="form-check-input" type="checkbox" id="price-2" value="duoi-1-trieu">
+                                    <label class="form-check-label" for="price-2">Dưới 1 triệu</label>
                                 </div>
 
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="price-3" value="10-15-trieu">
-                                    <label class="form-check-label" for="price-3">Từ 10 - 15
+                                    <input class="form-check-input" type="checkbox" id="price-3" value="1-2-trieu">
+                                    <label class="form-check-label" for="price-3">Từ 1 - 2
                                         triệu</label>
                                 </div>
 
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="price-4" value="15-20-trieu">
-                                    <label class="form-check-label" for="price-4">Từ 15 - 20
+                                    <input class="form-check-input" type="checkbox" id="price-4" value="2-3-trieu">
+                                    <label class="form-check-label" for="price-4">Từ 2 - 3
                                         triệu</label>
                                 </div>
 
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="price-5" value="tren-20-trieu">
-                                    <label class="form-check-label" for="price-5">Trên 20 triệu</label>
+                                    <input class="form-check-input" type="checkbox" id="price-5" value="tren-3-trieu">
+                                    <label class="form-check-label" for="price-5">Trên 3 triệu</label>
                                 </div>
                             </div>
                             <div class="col-12">
