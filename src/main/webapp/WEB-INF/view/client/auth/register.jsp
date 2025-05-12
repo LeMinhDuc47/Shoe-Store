@@ -53,7 +53,7 @@
         <div class="col-lg-7">
             <div class="card card-register shadow-lg p-4">
                 <div class="text-center mb-4">
-                    <i class="fas fa-user-plus fa-3x text-primary"></i>
+                    <i class="fas fa-shoe-prints fa-3x text-primary"></i>
                     <h2 class="mt-2">Create Account</h2>
                 </div>
                 <div class="card-body">

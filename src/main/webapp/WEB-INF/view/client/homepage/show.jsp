@@ -127,8 +127,300 @@
         </div>
     </div>
     <!-- Fruits Shop End-->
+    <!-- Featurs Start -->
+    <div class="container-fluid service py-5">
+        <div class="container py-5">
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <a href="#">
+                        <div class="service-item bg-secondary rounded border border-secondary">
+                            <img src="/client/img/feature3.avif" class="img-fluid rounded-top w-100" alt="">
+                            <div class="px-4 rounded-bottom">
+                                <div class="service-content bg-primary text-center p-4 rounded">
+                                    <h5 class="text-white">Soccer Exclusive</h5>
+                                    <h3 class="mb-0">20% OFF</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <a href="#">
+                        <div class="service-item bg-dark rounded border border-dark">
+                            <img src="/client/img/feature1.avif" class="img-fluid rounded-top w-100" alt="">
+                            <div class="px-4 rounded-bottom">
+                                <div class="service-content bg-light text-center p-4 rounded">
+                                    <h5 class="text-primary">Signature Boot</h5>
+                                    <h3 class="mb-0">Free delivery</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <a href="#">
+                        <div class="service-item bg-primary rounded border border-primary">
+                            <img src="/client/img/feature2.jpg" class="img-fluid rounded-top w-100" alt="">
+                            <div class="px-4 rounded-bottom">
+                                <div class="service-content bg-secondary text-center p-4 rounded">
+                                    <h5 class="text-white">Boot</h5>
+                                    <h3 class="mb-0">Discount 30$</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Featurs End -->
+    <!--Shop Start-->
+    <div class="container-fluid vesitable py-5">
+        <div class="container py-5">
+            <h1 class="mb-0">Sản phẩm bán chạy</h1>
+            <div class="owl-carousel vegetable-carousel justify-content-center">
+                <c:forEach var="product" items="${products}">
+                    <div class="border border-primary rounded position-relative vesitable-item">
+                        <!-- Hình ảnh -->
+                        <div class="vesitable-img">
+                            <img src="/images/product/${product.image}" class="img-fluid w-100 rounded-top"
+                                alt="${product.name}" />
+                        </div>
+                        <!-- Tag target -->
+                        <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
+                            style="top: 10px; right: 10px;">
+                            ${product.target}
+                        </div>
+                        <!-- Nội dung -->
+                        <div class="p-4 rounded-bottom">
+                            <h4>${product.name}</h4>
+                            <p class="text-truncate" style="max-width: 100%;">
+                                ${product.shortDesc}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="text-dark fs-5 fw-bold mb-0">
+                                    <fmt:formatNumber type="number" value="${product.price}" /> đ
+                                </p>
+                                <button data-product-id="${product.id}"
+                                    class="btnAddToCartHomepage btn border border-secondary rounded-pill px-3 text-primary">
+                                    <i class="fa fa-shopping-bag me-2"></i>
+                                    Add to cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+    </div>
+    <!--Shop End-->
 
 
+    <!-- Banner Section Start-->
+    <div class="container-fluid banner p-0">
+        <div class="row g-0 align-items-stretch" style="min-height:450px;">
+            <!-- Text Column -->
+            <div class="col-lg-6 bg-neon d-flex align-items-center">
+                <div class="px-5 py-4 w-100">
+                    <h1 class="banner-title mb-2">FABIAN HOLLAND</h1>
+                    <p class="banner-subtitle mb-4">(SV Darmstadt 98)</p>
+                    <p class="banner-quote">
+                        “I've always had trouble finding sboots that fit, and have tested many things over the years.
+                        Shoestore finally offers me perfectly fitting football boots.”
+                    </p>
+                </div>
+            </div>
+            <!-- Image Column -->
+            <div class="col-lg-6 p-0">
+                <img src="client/img/fabian-holland _1_.jpg" alt="Fabian Holland"
+                    class="img-fluid w-100 h-100 img-cover" />
+            </div>
+        </div>
+    </div>
+    <!-- Banner Section End-->
+
+    <!-- Bestseller Products Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="text-center mx-auto mb-5" style="max-width: 700px;">
+                <h1 class="display-4">Sản phẩm được đánh giá cao</h1>
+            </div>
+
+            <div class="row g-4">
+                <!-- Loop 6 sản phẩm đầu -->
+                <c:forEach var="product" items="${products}" begin="0" end="5">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card product-item h-100">
+                            <!-- Ảnh sản phẩm -->
+                            <div class="image-container rounded-circle mx-auto mt-3">
+                                <img src="/images/product/${product.image}" alt="${product.name}" class="img-fluid" />
+                            </div>
+                            <!-- Body -->
+                            <div class="card-body d-flex flex-column text-center">
+                                <a href="/product/${product.id}" class="card-title h5 mb-2">${product.name}</a>
+
+                                <div class="rating mb-3">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+
+                                <p class="price mb-4">
+                                    <fmt:formatNumber type="number" value="${product.price}" /> $
+                                </p>
+
+                                <button data-product-id="${product.id}"
+                                    class="btn btn-outline-primary mt-auto btnAddToCartHomepage">
+                                    <i class="fa fa-shopping-bag me-2"></i>Add to cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+    </div>
+    <!-- Bestseller Products End -->
+
+
+    <!-- Fact Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="bg-light p-5 rounded">
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="counter bg-white rounded p-5">
+                            <i class="fa fa-users text-secondary"></i>
+                            <h4>satisfied customers</h4>
+                            <h1>1963</h1>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="counter bg-white rounded p-5">
+                            <i class="fa fa-users text-secondary"></i>
+                            <h4>quality of service</h4>
+                            <h1>99%</h1>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="counter bg-white rounded p-5">
+                            <i class="fa fa-users text-secondary"></i>
+                            <h4>quality certificates</h4>
+                            <h1>33</h1>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="counter bg-white rounded p-5">
+                            <i class="fa fa-users text-secondary"></i>
+                            <h4>Available Products</h4>
+                            <h1>89</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fact Start -->
+
+
+    <!-- Tastimonial Start -->
+    <div class="container-fluid testimonial py-5">
+        <div class="container py-5">
+            <div class="testimonial-header text-center">
+                <h4 class="text-primary">Our Testimonial</h4>
+                <h1 class="display-5 mb-5 text-dark">Our Client Saying!</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel">
+                <div class="testimonial-item img-border-radius bg-light rounded p-4">
+                    <div class="position-relative">
+                        <i class="fa fa-quote-right fa-2x text-secondary position-absolute"
+                            style="bottom: 30px; right: 0;"></i>
+                        <div class="mb-4 pb-4 border-bottom border-secondary">
+                            <p class="mb-0">"I was surprised by how smooth the checkout process was. Great design, fast
+                                loading, and the shoes arrived even earlier than expected!"
+                            </p>
+                        </div>
+                        <div class="d-flex align-items-center flex-nowrap">
+                            <div class="bg-secondary rounded">
+                                <img src="/client/img/testimonial2.jpg" class="img-fluid rounded"
+                                    style="width: 100px; height: 100px;" alt="">
+                            </div>
+                            <div class="ms-4 d-block">
+                                <h4 class="text-dark">C.Ronaldo</h4>
+                                <p class="m-0 pb-3">Profession</p>
+                                <div class="d-flex pe-5">
+                                    <i class="fas fa-star text-primary"></i>
+                                    <i class="fas fa-star text-primary"></i>
+                                    <i class="fas fa-star text-primary"></i>
+                                    <i class="fas fa-star text-primary"></i>
+                                    <i class="fas fa-star text-primary"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-item img-border-radius bg-light rounded p-4">
+                    <div class="position-relative">
+                        <i class="fa fa-quote-right fa-2x text-secondary position-absolute"
+                            style="bottom: 30px; right: 0;"></i>
+                        <div class="mb-4 pb-4 border-bottom border-secondary">
+                            <p class="mb-0">"Shoestore completely changed the way I buy shoes online. The fit guide is
+                                accurate, and I finally found football boots that feel like they were made for me!."
+                            </p>
+                        </div>
+                        <div class="d-flex align-items-center flex-nowrap">
+                            <div class="bg-secondary rounded">
+                                <img src="/client/img/testimonial1.jpg" class="img-fluid rounded"
+                                    style="width: 100px; height: 100px;" alt="">
+                            </div>
+                            <div class="ms-4 d-block">
+                                <h4 class="text-dark">L.Messi</h4>
+                                <p class="m-0 pb-3">Profession</p>
+                                <div class="d-flex pe-5">
+                                    <i class="fas fa-star text-primary"></i>
+                                    <i class="fas fa-star text-primary"></i>
+                                    <i class="fas fa-star text-primary"></i>
+                                    <i class="fas fa-star text-primary"></i>
+                                    <i class="fas fa-star text-primary"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-item img-border-radius bg-light rounded p-4">
+                    <div class="position-relative">
+                        <i class="fa fa-quote-right fa-2x text-secondary position-absolute"
+                            style="bottom: 30px; right: 0;"></i>
+                        <div class="mb-4 pb-4 border-bottom border-secondary">
+                            <p class="mb-0">"The product photos are spot on, and what you see is exactly what you get.
+                                Shoestore makes online shoe shopping easy and trustworthy."
+                            </p>
+                        </div>
+                        <div class="d-flex align-items-center flex-nowrap">
+                            <div class="bg-secondary rounded">
+                                <img src="/client/img/testimonial3.jpg" class="img-fluid rounded"
+                                    style="width: 100px; height: 100px;" alt="">
+                            </div>
+                            <div class="ms-4 d-block">
+                                <h4 class="text-dark">Neymar JR</h4>
+                                <p class="m-0 pb-3">Profession</p>
+                                <div class="d-flex pe-5">
+                                    <i class="fas fa-star text-primary"></i>
+                                    <i class="fas fa-star text-primary"></i>
+                                    <i class="fas fa-star text-primary"></i>
+                                    <i class="fas fa-star text-primary"></i>
+                                    <i class="fas fa-star text-primary"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Tastimonial End -->
     <jsp:include page="../layout/feature.jsp" />
 
 

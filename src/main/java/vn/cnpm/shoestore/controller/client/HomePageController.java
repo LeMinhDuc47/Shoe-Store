@@ -96,4 +96,8 @@ public class HomePageController {
         return "client/cart/order-history";
     }
 
+    @GetMapping("/contact")
+    public String getContactPage(Model model) {
+        return "client/homepage/contact";
+    }
 }

@@ -26,13 +26,13 @@
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">Thống kê</li>
                     </ol>
+                    <!-- Summary Cards -->
                     <div class="row">
                         <div class="col-xl-4 col-md-6">
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body">Số lượng User (${countUsers})</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="/admin/user">View
-                                        Details</a>
+                                    <a class="small text-white stretched-link" href="/admin/user">View Details</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -41,8 +41,7 @@
                             <div class="card bg-danger text-white mb-4">
                                 <div class="card-body">Số lượng Product (${countProducts})</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="/admin/product">View
-                                        Details</a>
+                                    <a class="small text-white stretched-link" href="/admin/product">View Details</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
@@ -51,21 +50,117 @@
                             <div class="card bg-success text-white mb-4">
                                 <div class="card-body">Số lượng Order (${countOrders})</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <a class="small text-white stretched-link" href="/admin/order">View
-                                        Details</a>
+                                    <a class="small text-white stretched-link" href="/admin/order">View Details</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
+                    <!-- Charts Row -->
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-area me-1"></i>
+                                    Area Chart
+                                </div>
+                                <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-chart-bar me-1"></i>
+                                    Bar Chart
+                                </div>
+                                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- DataTable Card -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-table me-1"></i>
+                                    DataTable
+                                </div>
+                                <div class="card-body">
+                                    <table id="datatablesSimple" class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Position</th>
+                                                <th>Office</th>
+                                                <th>Age</th>
+                                                <th>Start date</th>
+                                                <th>Salary</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Position</th>
+                                                <th>Office</th>
+                                                <th>Age</th>
+                                                <th>Start date</th>
+                                                <th>Salary</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <tr>
+                                                <td>Nguyễn Bích Đạt</td>
+                                                <td>Project Manager</td>
+                                                <td>Hà Nội</td>
+                                                <td>20</td>
+                                                <td>2025/04/25</td>
+                                                <td>$1000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Vũ Tiến Đạt</td>
+                                                <td>Front End</td>
+                                                <td>Hà Nội</td>
+                                                <td>20</td>
+                                                <td>2025/04/2</td>
+                                                <td>$1000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Lê Minh Đức</td>
+                                                <td>Back End</td>
+                                                <td>Hà Nội</td>
+                                                <td>20</td>
+                                                <td>2025/04/12</td>
+                                                <td>$1001</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nguyễn Thế Hùng</td>
+                                                <td>Database Designer</td>
+                                                <td>Hà Nội</td>
+                                                <td>20</td>
+                                                <td>2025/04/20</td>
+                                                <td>$1001</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Bùi Hiếu</td>
+                                                <td>Front End</td>
+                                                <td>Hà Nội</td>
+                                                <td>20</td>
+                                                <td>2025/4/28</td>
+                                                <td>$1000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
             <jsp:include page="../layout/footer.jsp" />
             <jsp:include page="../../client/layout/chat-bot.jsp" />
         </div>
     </div>
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
     <script src="js/scripts.js"></script>

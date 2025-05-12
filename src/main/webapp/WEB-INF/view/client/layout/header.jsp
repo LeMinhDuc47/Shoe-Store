@@ -15,6 +15,7 @@
                 <div class="navbar-nav">
                     <a href="/" class="nav-item nav-link active">Trang chủ</a>
                     <a href="/products" class="nav-item nav-link">Sản phẩm</a>
+                    <a href="/contact" class="nav-item nav-link">Contact</a>
                 </div>
                 <!-- Search bar -->
                 <div class="text-center">
