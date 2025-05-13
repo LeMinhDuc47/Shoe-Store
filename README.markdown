@@ -98,6 +98,4 @@ Chạy lệnh:
 - **Maven:**  `3.6+`
 - **MySQL Server:** version `8.0+`
 
----
-## 7. Thông tin khác
-    Liên hệ: 23021532@vnu.edu.vn
+
