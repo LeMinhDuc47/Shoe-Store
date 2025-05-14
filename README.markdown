@@ -20,7 +20,7 @@ SHOE-STORE/
 │   │   │   ├── repository/       # Repository JPA
 │   │   │   └── service/          # Business logic
 │   ├── resources/                # application.properties
-│   └── webapp/                   # View JSP, tài nguyên tĩnh (JS/CSS/IMG)
+│   └── webapp/                   # View JSP,JSTL tài nguyên tĩnh (JS/CSS/IMG)
 ├── pom.xml                       # Cấu hình Maven
 </pre>
 
